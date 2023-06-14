@@ -3,6 +3,13 @@ import fastify from "fastify";
 import { z } from "zod"
 
 const app = fastify();
+import cors from '@fastify/cors'
+
+app.register(cors, {
+    origin: '*',
+    methods: ['GET', 'POST'],
+    credentials: true
+})
 
 const prisma = new PrismaClient();
 

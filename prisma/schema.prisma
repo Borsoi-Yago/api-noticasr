@@ -12,6 +12,7 @@ datasource db {
 
 model Noticia {
   id        Int      @id @default(autoincrement())
+  manchete  String
   imagem    String
   lide      String
   createdAt DateTime @default(now())

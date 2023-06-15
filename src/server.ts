@@ -40,16 +40,15 @@ app.post('/noticias/cadastrar', async (request, replay) => {
 app.put('/noticias/:id', async (request, replay) => {
 
     const createNoticiaSchema = z.object({
-        id: z.number(),
         manchete: z.string(),
         imagem: z.string(),
         lide: z.string()
     })
-    const { id } = createNoticiaSchema.parse(request.params)
+    const id = request.params
     const { manchete, imagem, lide } = createNoticiaSchema.parse(request.body)
 
     await prisma.noticia.update({
-        where: { id: id },
+        where: { id: Number(id) },
         data: {
             manchete: manchete,
             imagem: imagem,
@@ -61,13 +60,10 @@ app.put('/noticias/:id', async (request, replay) => {
 
 app.delete('/noticias/:id', async (request, replay) => {
 
-    const createNoticiaSchema = z.object({
-        id: z.number(),
-    })
-    const { id } = createNoticiaSchema.parse(request.params)
+    const id = request.params
 
     await prisma.noticia.delete({
-        where: { id: id },
+        where: { id: Number(id) },
     })
     return replay.status(201).send()
 })

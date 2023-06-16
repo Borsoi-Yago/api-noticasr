@@ -39,13 +39,8 @@ app.post('/noticias/cadastrar', async (request, replay) => {
 
 app.put('/noticias/:id', async (request, replay) => {
 
-    const createNoticiaSchema = z.object({
-        manchete: z.string(),
-        imagem: z.string(),
-        lide: z.string()
-    })
     const { id } = request.params
-    const { manchete, imagem, lide } = createNoticiaSchema.parse(request.body)
+    const { manchete, imagem, lide } = request.body
 
     await prisma.noticia.update({
         where: { id: Number(id) },

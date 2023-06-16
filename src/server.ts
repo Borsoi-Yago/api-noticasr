@@ -50,9 +50,9 @@ app.put('/noticias/:id', async (request, replay) => {
     await prisma.noticia.update({
         where: { id: Number(id) },
         data: {
-            manchete: manchete,
-            imagem: imagem,
-            lide: lide
+            manchete: manchete || undefined,
+            imagem: imagem || undefined,
+            lide: lide || undefined
         },
     })
     return replay.status(201).send()
